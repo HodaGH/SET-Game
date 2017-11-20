@@ -71,11 +71,12 @@ def maxDisSets(index, disCards, disSETs, count, listOfSets):
     global maxCount
     global maxDisSETs #list of indexes of SETs that form the maximum disjoint sets
     
-    if index > len(listOfSets) - 1: return maxCount
+    if index > len(listOfSets) - 1:
+        return maxCount
     if count >= maxCount:
         maxCount = count
         maxDisSETs = disSETs
-
+        
     maxDisSets(copy.deepcopy(index + 1), copy.deepcopy(disCards), copy.deepcopy(disSETs), copy.deepcopy(count), listOfSets )
     if((listOfSets[index][0] not in disCards) and (listOfSets[index][1] not in disCards) and (listOfSets[index][2] not in disCards)):
         disCards.add(listOfSets[index][0])
@@ -84,11 +85,13 @@ def maxDisSets(index, disCards, disSETs, count, listOfSets):
         count = count + 1
         disSETs.add(index)
         
-    if count >= maxCount:
-        maxCount = count
-        maxDisSETs = disSETs
+        if count >= maxCount:
+            maxCount = count
+            maxDisSETs = disSETs
 
-    maxDisSets(copy.deepcopy(index+1), copy.deepcopy(disCards), copy.deepcopy(disSETs), copy.deepcopy(count), listOfSets)
+        maxDisSets(copy.deepcopy(index+1), copy.deepcopy(disCards), copy.deepcopy(disSETs), copy.deepcopy(count), listOfSets)
+
+    return
 
 
 if __name__ == '__main__':
@@ -119,7 +122,7 @@ if __name__ == '__main__':
     print(maxCount)
     
     #prints output
-    for i in maxIndSet:
+    for i in maxDisSETs:
             print ("\n")
             c1 = listOfSets[i][0] 
             c2 = listOfSets[i][1]
